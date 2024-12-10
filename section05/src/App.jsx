@@ -53,6 +53,10 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== targetId));
   };
 
+  const onEdit = (targetId) => {
+    setTodos(todos.map((todo) => {}));
+  };
+
   return (
     <div className="App">
       <Header />

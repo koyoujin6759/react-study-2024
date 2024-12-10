@@ -2,7 +2,7 @@ import "./List.css";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
 
-const List = ({ todos, onUpdate, onDelete }) => {
+const List = ({ todos, onUpdate, onDelete, onEdit }) => {
   const [search, setSearch] = useState("");
 
   const onChangeSearch = (e) => {
@@ -27,7 +27,7 @@ const List = ({ todos, onUpdate, onDelete }) => {
         {filteredTodos.map((todo) => {
           //map함수 안에 콜백함수
           // return <div>{todo.content}</div>;
-          return <TodoItem key={todo.id} {...todo} onUpdate={onUpdate} onDelete={onDelete} />;
+          return <TodoItem key={todo.id} {...todo} onUpdate={onUpdate} onDelete={onDelete} onEdit={onEdit} />;
         })}
       </div>
     </div>
