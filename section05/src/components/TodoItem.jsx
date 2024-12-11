@@ -20,7 +20,6 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete, onEdit }) => 
     setEdit(!edit);
   };
   const onChangeContent = (e) => {
-    // console.log(e.target.value);
     setEditContent(e.target.value);
   };
   return (
