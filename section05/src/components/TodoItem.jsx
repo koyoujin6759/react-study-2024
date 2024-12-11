@@ -2,7 +2,8 @@ import "./TodoItem.css";
 import { useRef, useState } from "react";
 
 const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete, onEdit }) => {
-  const setEdit = useRef(false);
+  const [edit, setEdit] = useState(false);
+  const [editContent, setEditContent] = useState("");
 
   const onChangeCheckbox = () => {
     onUpdate(id);
@@ -11,10 +12,16 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete, onEdit }) => 
     onDelete(id);
   };
   const onEditItem = () => {
-    onEdit(id);
+    onEdit(id, editContent);
+    setEditContent("");
+    setEdit(!edit);
   };
   const onEditToggle = () => {
-    setEdit.current = !setEdit.current;
+    setEdit(!edit);
+  };
+  const onChangeContent = (e) => {
+    // console.log(e.target.value);
+    setEditContent(e.target.value);
   };
   return (
     <div className="TodoItemWrap">
@@ -25,8 +32,8 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete, onEdit }) => 
         <button onClick={onEditToggle}>수정</button>
         <button onClick={onDeleteItem}>삭제</button>
       </div>
-      <div className="EditWrap" style={{ display: onEditToggle == true ? "block" : "none" }}>
-        <input type="text" placeholder="수정할 내용을 작성하세요" />
+      <div className="EditWrap" style={{ display: edit == true ? "block" : "none" }}>
+        <input type="text" onChange={onChangeContent} value={editContent} placeholder="수정할 내용을 작성하세요" />
         <button onClick={onEditItem}>완료</button>
       </div>
     </div>
