@@ -7,14 +7,14 @@ const Editor2 = ({ onCreate }) => {
   };
   const onSubmit = () => {
     onCreate(content);
-    setContent("");
   };
 
   return (
-    <div className="input-wrap">
-      <input type="text" value={content} onChange={onChangeContent} placeholder="오늘의 할일을 적어주세요" />
+    <div className="editor-wrap">
+      <input type="text" value={content} onChange={onChangeContent} placeholder="할일을 입력하세요" />
       <button onClick={onSubmit}>추가</button>
     </div>
   );
 };
+
 export default Editor2;

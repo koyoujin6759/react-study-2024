@@ -1,14 +1,14 @@
-.list {
+.item {
   display: flex;
   gap: 20px;
   border-bottom: 1px solid #ccc;
   padding: 15px 0;
   align-items: center;
 }
-.list .content {
+.item .content {
   flex: 1;
 }
-.list .date {
+.item .date {
   font-size: 14px;
   color: #777;
 }
