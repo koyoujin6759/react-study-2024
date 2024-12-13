@@ -7,47 +7,36 @@ const mockData = [
   {
     id: 0,
     content: "공부하기",
-    isDone: false,
     date: new Date().getTime(),
   },
   {
     id: 1,
-    content: "설거지하기",
-    isDone: false,
+    content: "빨래하기",
     date: new Date().getTime(),
   },
   {
     id: 2,
-    content: "운동하기",
-    isDone: false,
+    content: "청소하기",
     date: new Date().getTime(),
   },
 ];
 function App() {
   const [todos, setTodos] = useState(mockData);
-  const idRef = useRef(3);
   const onCreate = (content) => {
-    const newTodo = {
-      id: idRef.current++,
+    const newData = {
+      id: 0,
       content: content,
-      isDone: false,
       date: new Date().getTime(),
     };
-    setTodos([...todos, newTodo]);
+    setTodos([newData, ...todos]);
   };
-
   const onDelete = (targetId) => {
     setTodos(todos.filter((todo) => todo.id !== targetId));
   };
-
-  const onEdit = (targetId, editContent) => {
-    setTodos(todos.map((todo) => (targetId === todo.id ? { ...todo, content: editContent } : todo)));
-  };
-
   return (
     <div className="App">
       <Editor2 onCreate={onCreate} />
-      <List2 todos={todos} onDelete={onDelete} onEdit={onEdit} />
+      <List2 todos={todos} onDelete={onDelete} />
     </div>
   );
 }
