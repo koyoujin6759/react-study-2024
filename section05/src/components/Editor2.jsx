@@ -7,6 +7,7 @@ const Editor2 = ({ onCreate }) => {
   };
   const onSubmit = () => {
     onCreate(content);
+    setContent("");
   };
   return (
     <div>

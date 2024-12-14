@@ -11,32 +11,35 @@ const mockData = [
   },
   {
     id: 1,
-    content: "빨래하기",
+    content: "청소하기",
     date: new Date().getTime(),
   },
   {
     id: 2,
-    content: "청소하기",
+    content: "빨래하기",
     date: new Date().getTime(),
   },
 ];
 function App() {
   const [todos, setTodos] = useState(mockData);
   const onCreate = (content) => {
-    const newData = {
+    const newTodo = {
       id: 0,
       content: content,
       date: new Date().getTime(),
     };
-    setTodos([newData, ...todos]);
+    setTodos([newTodo, ...todos]);
   };
   const onDelete = (targetId) => {
     setTodos(todos.filter((todo) => todo.id !== targetId));
   };
+  const onEdit = (targetId, newContent) => {
+    setTodos(todos.map((todo) => (targetId === todo.id ? { ...todo, content: newContent } : todo)));
+  };
   return (
     <div className="App">
       <Editor2 onCreate={onCreate} />
-      <List2 todos={todos} onDelete={onDelete} />
+      <List2 todos={todos} onDelete={onDelete} onEdit={onEdit} />
     </div>
   );
 }
