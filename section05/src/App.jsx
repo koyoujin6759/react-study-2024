@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useReducer } from "react";
 import Editor2 from "./components/Editor2";
 import List2 from "./components/List2";
+// import Exam from "./components/Exam";
 import "./App.css";
 
 const mockData = [
@@ -20,26 +21,50 @@ const mockData = [
     date: new Date().getTime(),
   },
 ];
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "create":
+      return [...state, action.data];
+    case "delete":
+      return state.filter((item) => item.id !== action.targetId);
+    case "edit":
+      return state.map((item) => (item.id === action.targetId ? { ...state, content: action.content, date: new Date().getTime() } : item));
+  }
+}
 function App() {
-  const [todos, setTodos] = useState(mockData);
+  // const [todos, setTodos] = useState(mockData);
+  const [todos, dispatch] = useReducer(reducer, mockData);
+  const idRef = useRef(3);
+
   const onCreate = (content) => {
-    const newTodo = {
-      id: 0,
-      content: content,
-      date: new Date().getTime(),
-    };
-    setTodos([newTodo, ...todos]);
+    dispatch({
+      type: "create",
+      data: {
+        id: idRef.current++,
+        content: content,
+        date: new Date().getTime(),
+      },
+    });
   };
   const onDelete = (targetId) => {
-    setTodos(todos.filter((todo) => todo.id !== targetId));
+    dispatch({
+      type: "delete",
+      targetId: targetId,
+    });
   };
   const onEdit = (targetId, newContent) => {
-    setTodos(todos.map((todo) => (targetId === todo.id ? { ...todo, content: newContent } : todo)));
+    dispatch({
+      type: "edit",
+      targetId: targetId,
+      content: newContent,
+    });
   };
   return (
     <div className="App">
       <Editor2 onCreate={onCreate} />
       <List2 todos={todos} onDelete={onDelete} onEdit={onEdit} />
+      {/* <Exam /> */}
     </div>
   );
 }

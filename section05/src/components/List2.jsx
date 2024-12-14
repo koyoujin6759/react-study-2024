@@ -1,5 +1,5 @@
 import TodoItem2 from "./TodoItem2";
-import { useActionState, useState } from "react";
+import { useState } from "react";
 
 const List2 = ({ todos, onDelete, onEdit }) => {
   const [search, setSearch] = useState("");
@@ -13,6 +13,7 @@ const List2 = ({ todos, onDelete, onEdit }) => {
     return todos.filter((todo) => todo.content.toLowerCase().includes(search.toLowerCase()));
   };
   const filterdTodos = getFilteredData();
+
   return (
     <div className="list-wrap">
       <div className="search-wrap">
