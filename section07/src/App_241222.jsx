@@ -1,4 +1,4 @@
-import { useState, useRef, useReducer, useCallback } from "react";
+import { useState, useRef, useReducer } from "react";
 import Header from "./components/Header";
 import Editor2 from "./components/Editor2";
 import List2 from "./components/List2";
@@ -43,7 +43,7 @@ function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
 
-  const onCreate = useCallback((content) => {
+  const onCreate = (content) => {
     dispatch({
       type: "create",
       data: {
@@ -53,30 +53,26 @@ function App() {
         date: new Date().getTime(),
       },
     });
-  }, []);
-
-  const onUpdate = useCallback((targetId) => {
+  };
+  const onUpdate = (targetId) => {
     dispatch({
       type: "update",
       targetId: targetId,
     });
-  }, []);
-
-  const onEdit = useCallback((targetId, newContent) => {
+  };
+  const onDelete = (targetId) => {
+    dispatch({
+      type: "delete",
+      targetId: targetId,
+    });
+  };
+  const onEdit = (targetId, newContent) => {
     dispatch({
       type: "edit",
       targetId: targetId,
       content: newContent,
     });
-  }, []);
-
-  const onDelete = useCallback((targetId) => {
-    dispatch({
-      type: "delete",
-      targetId: targetId,
-    });
-  }, []); //마운트될때만 리렌더링 (최적화)
-
+  };
   return (
     <div className="App">
       <Header />
