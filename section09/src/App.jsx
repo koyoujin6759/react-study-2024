@@ -12,19 +12,19 @@ import Edit from "./pages/Edit";
 const mockData = [
   {
     id: 1,
-    createDate: new Date("2024-12-23").getTime(),
+    createdDate: new Date("2024-12-23").getTime(),
     emotionId: 1,
     content: "1번 일기내용",
   },
   {
     id: 2,
-    createDate: new Date("2024-12-27").getTime(),
+    createdDate: new Date("2024-12-27").getTime(),
     emotionId: 2,
     content: "2번 일기내용",
   },
   {
     id: 3,
-    createDate: new Date("2024-11-17").getTime(),
+    createdDate: new Date("2024-11-17").getTime(),
     emotionId: 3,
     content: "3번 일기내용",
   },
@@ -40,19 +40,19 @@ function reducer(state, action) {
   }
 }
 export const DiaryStateContext = createContext(); //data 전달
-export const DiaryDispatchContext = createContext(); //상태변화함화 전달
+export const DiaryDispatchContext = createContext(); //상태변화함수 전달
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(4);
 
   //새로운 일기 추가
-  const onCreate = (createDate, emotionId, content) => {
+  const onCreate = (createdDate, emotionId, content) => {
     dispatch({
       type: "create",
       data: {
         id: idRef.current++,
-        createDate,
+        createdDate,
         emotionId,
         content,
       },
@@ -60,12 +60,12 @@ function App() {
   };
 
   //기존 일기 수정
-  const onUpdate = (id, createDate, emotionId, content) => {
+  const onUpdate = (id, createdDate, emotionId, content) => {
     dispatch({
       type: "update",
       data: {
         id,
-        createDate,
+        createdDate,
         emotionId,
         content,
       },
