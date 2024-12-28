@@ -50,7 +50,7 @@ function reducer(state, action) {
     default:
       return state;
   }
-  localStorage.setItem("diary", JSON.stringify(nextState));
+  localStorage.setItem("diary", JSON.stringify(nextState)); //문자열로 변환
   return nextState;
 }
 export const DiaryStateContext = createContext(); //data 전달
@@ -67,7 +67,7 @@ function App() {
       setIsLoading(false);
       return;
     }
-    const parsedData = JSON.parse(storedData);
+    const parsedData = JSON.parse(storedData); //문자열을 다시 변환
     if (!Array.isArray(parsedData)) {
       //배열이 아니면
       setIsLoading(false);
@@ -77,6 +77,7 @@ function App() {
     let maxId = 0;
     parsedData.forEach((item) => {
       if (Number(item.id) > maxId) {
+        //최대값구하기 (id값이 겹치지않게 하기위해..)
         maxId = Number(item.id);
       }
     });
