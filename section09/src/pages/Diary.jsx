@@ -6,6 +6,7 @@ import { DiaryStateContext } from "../App";
 import { useContext, useState, useEffect } from "react";
 import useDiary from "../hooks/useDiary";
 import { getStringedDate } from "../util/get-stringed-date";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Diary = () => {
   const params = useParams();
@@ -13,6 +14,7 @@ const Diary = () => {
   const data = useContext(DiaryStateContext);
   // console.log(data);
   const curDiaryItem = useDiary(params.id);
+  usePageTitle(`${params.id}번 일기`);
 
   if (!curDiaryItem) {
     return <div>데이터 로딩중..!</div>;

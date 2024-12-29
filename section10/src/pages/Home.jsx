@@ -1,8 +1,8 @@
-import Button from "../components/Button";
-import Header from "../components/Header";
-import DiaryList from "../components/DiaryList";
 import { useState, useContext } from "react";
 import { DiaryStateContext } from "../App";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import DiaryList from "../components/DiaryList";
 
 const getMonthlyData = (pivotDate, data) => {
   const beginTime = new Date(pivotDate.getFullYear(), pivotDate.getMonth(), 1, 0, 0, 0).getTime();
@@ -18,7 +18,6 @@ const Home = () => {
   const onIncreaseMonth = () => {
     setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
   };
-
   const onDecreaseMonth = () => {
     setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() - 1));
   };
@@ -30,4 +29,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;
